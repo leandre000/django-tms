@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from rest_framework import viewsets
 from .models import Contributor, Task
 from .serializers import ContributorSerializer, TaskSerializer
@@ -10,13 +11,13 @@ def add_contributor(request):
     if request.method == 'POST':
         form = ContributorForm(request.POST)
         if form.is_valid():
-            form.save()
+            contributor = form.save()
+            messages.success(request, f'Contributor "{contributor.name}" saved successfully to database!')
             return redirect('add_contributor')
     else:
         form = ContributorForm()
     
-    contributors = Contributor.objects.all()
-    return render(request, 'tms/add_contributor.html', {'form': form, 'contributors': contributors})
+    return render(request, 'tms/add_contributor.html', {'form': form})
 
 
 class ContributorViewSet(viewsets.ModelViewSet):
