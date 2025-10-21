@@ -3,33 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Contributor - TMS</title>
+    <title>Add Contributor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow">
+    <div class="container py-5">
+        <div class="row">
+            <!-- Add Form -->
+            <div class="col-md-5 mb-4">
+                <div class="card shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h3 class="mb-0">Add Contributor</h3>
+                        <h4 class="mb-0">Add Contributor</h4>
                     </div>
                     <div class="card-body">
                         <form method="post">
                             {% csrf_token %}
                             
                             <div class="mb-3">
-                                <label for="id_name" class="form-label">Name</label>
+                                <label class="form-label fw-bold">Name</label>
                                 {{ form.name }}
                             </div>
                             
                             <div class="mb-3">
-                                <label for="id_email" class="form-label">Email</label>
+                                <label class="form-label fw-bold">Email</label>
                                 {{ form.email }}
                             </div>
                             
-                            <button type="submit" class="btn btn-primary w-100">Add Contributor</button>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    Save Contributor
+                                </button>
+                                <button type="reset" class="btn btn-secondary">
+                                    Clear Form
+                                </button>
+                            </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contributors List -->
+            <div class="col-md-7">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="mb-0">All Contributors</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if contributors %}
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for contributor in contributors %}
+                                        <tr>
+                                            <td>{{ contributor.id }}</td>
+                                            <td>{{ contributor.name }}</td>
+                                            <td>{{ contributor.email }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p class="text-center text-muted py-4">No contributors yet. Add one to get started!</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
