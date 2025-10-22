@@ -7,7 +7,7 @@ class ContributorForm(forms.ModelForm):
     
     class Meta:
         model = Contributor
-        fields = ['name', 'email']
+        fields = ['name', 'email', 'is_present']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 shadow-sm',
@@ -17,10 +17,14 @@ class ContributorForm(forms.ModelForm):
                 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 shadow-sm',
                 'placeholder': 'Enter email address'
             }),
+            'is_present': forms.CheckboxInput(attrs={
+                'class': 'w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer'
+            }),
         }
         labels = {
             'name': 'Contributor Name',
             'email': 'Email Address',
+            'is_present': 'Present',
         }
 
 

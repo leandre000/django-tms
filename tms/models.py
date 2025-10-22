@@ -5,6 +5,7 @@ from django.utils import timezone
 class Contributor(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
+    is_present = models.BooleanField(default=False)
     
     class Meta:
         db_table = 'contributors'

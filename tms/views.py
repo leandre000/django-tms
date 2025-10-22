@@ -7,6 +7,14 @@ from .forms import ContributorForm
 
 def mark_contributors(request):
     """View to display all contributors in a table format."""
+    if request.method == 'POST':
+        # Expect POST data like present_<id>=on for checked boxes
+        for contributor in Contributor.objects.all():
+            key = f'present_{contributor.id}'
+            contributor.is_present = True if request.POST.get(key) == 'on' else False
+            contributor.save()
+        messages.success(request, 'Attendance updated successfully.')
+
     contributors = Contributor.objects.all().order_by('id')
     return render(request, 'tms/mark_contributors.html', {'contributors': contributors})
 

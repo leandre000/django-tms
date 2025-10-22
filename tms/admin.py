@@ -4,7 +4,7 @@ from .models import Contributor, Task
 
 @admin.register(Contributor)
 class ContributorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'email']
+    list_display = ['id', 'name', 'email', 'is_present']
     search_fields = ['name', 'email']
     list_per_page = 20
 
