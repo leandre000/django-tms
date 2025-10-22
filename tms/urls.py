@@ -8,5 +8,5 @@ router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('add/', add_contributor, name='add_contributor'),
+    path('contributors/add/', add_contributor, name='add_contributor'),
 ]
