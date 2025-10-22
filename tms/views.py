@@ -5,6 +5,10 @@ from .models import Contributor, Task
 from .serializers import ContributorSerializer, TaskSerializer
 from .forms import ContributorForm
 
+def mark_contributors(request):
+    """View to display all contributors in a table format."""
+    contributors = Contributor.objects.all().order_by('id')
+    return render(request, 'tms/mark_contributors.html', {'contributors': contributors})
 
 def add_contributor(request):
     """View to add a new contributor."""
